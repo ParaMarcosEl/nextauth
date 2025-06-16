@@ -2,9 +2,12 @@
 
 import { getProviders, signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { ClientSafeProvider } from "next-auth/react";
+
+
 
 export default function SignIn() {
-  const [providers, setProviders] = useState<any>(null); /* eslint-disable  @typescript-eslint/no-explicit-any */
+  const [providers, setProviders] = useState<Record<string, ClientSafeProvider> | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -17,7 +20,7 @@ export default function SignIn() {
     <div className="p-4">
       <h1 className="text-xl font-bold mb-4">Sign In</h1>
       {providers &&
-        Object.values(providers).map((provider: any) => ( /* eslint-disable  @typescript-eslint/no-explicit-any */
+        Object.values(providers!).map((provider) => ( 
           <div key={provider.name}>
             <button
               onClick={() => signIn(provider.id)}
