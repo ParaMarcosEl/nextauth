@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, {NextAuthOptions} from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
@@ -6,8 +6,7 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
-
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
   secret: process.env.NEXTAUTH_SECRET,
@@ -27,7 +26,7 @@ const handler = NextAuth({
           where: { email: credentials?.email },
         });
 
-        if (!user || !user.password) return null;
+        if (!user || !user.password || !credentials) return null;
 
         const isValid = await bcrypt.compare(
           credentials?.password,
@@ -41,6 +40,7 @@ const handler = NextAuth({
   pages: {
     signIn: "/signin",
   },
-});
+};
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
