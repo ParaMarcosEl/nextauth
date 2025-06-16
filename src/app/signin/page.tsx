@@ -4,7 +4,7 @@ import { getProviders, signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 export default function SignIn() {
-  const [providers, setProviders] = useState<any>(null);
+  const [providers, setProviders] = useState<any>(null); // typescript-eslint-disable-line
 
   useEffect(() => {
     (async () => {
@@ -17,7 +17,7 @@ export default function SignIn() {
     <div className="p-4">
       <h1 className="text-xl font-bold mb-4">Sign In</h1>
       {providers &&
-        Object.values(providers).map((provider: any) => (
+        Object.values(providers).map((provider: any) => ( // typescript-eslint-disable-line
           <div key={provider.name}>
             <button
               onClick={() => signIn(provider.id)}

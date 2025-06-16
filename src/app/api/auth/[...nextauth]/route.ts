@@ -5,15 +5,6 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 
-[1,2,3,1,2,3,4]
-
-const result = {
-    "1": 2,
-    "2": 2,
-    "3": 2,
-    "4": 1
-}
-
 const prisma = new PrismaClient();
 
 const handler = NextAuth({
