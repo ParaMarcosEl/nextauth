@@ -1,34 +1,44 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-// Create a user
-export async function POST(req: Request) {
-  const body = await req.json();
+export async function GET(
+  _request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const user = await prisma.user.findUnique({ where: { id: params.id } });
 
-  if (!body.email || !body.name) {
-    return NextResponse.json({ error: "Missing name or email" }, { status: 400 });
+  if (!user) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
-  try {
-    const user = await prisma.user.create({
-      data: {
-        email: body.email,
-        name: body.name,
-      },
-    });
+  return NextResponse.json(user);
+}
 
-    return NextResponse.json(user);
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const updates = await request.json();
+
+  try {
+    const updated = await prisma.user.update({
+      where: { id: params.id },
+      data: updates,
+    });
+    return NextResponse.json(updated);
   } catch (err) {
-    return NextResponse.json({ error: err }, { status: 500 });
+    return NextResponse.json({ error: "Failed to update user" }, { status: 500 });
   }
 }
 
-// Get all users
-export async function GET() {
+export async function DELETE(
+  _request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
-    const users = await prisma.user.findMany();
-    return NextResponse.json(users);
+    await prisma.user.delete({ where: { id: params.id } });
+    return NextResponse.json({ success: true });
   } catch {
-    return NextResponse.json({ error: "Failed to fetch users" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to delete user" }, { status: 500 });
   }
 }
