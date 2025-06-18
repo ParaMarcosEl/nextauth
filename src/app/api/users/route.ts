@@ -26,8 +26,9 @@ export async function PUT(
       data: updates,
     });
     return NextResponse.json(updated);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
-    return NextResponse.json({ error: "Failed to update user", err }, { status: 500 });
+    return NextResponse.json({ error: "Failed to update user" }, { status: 500 });
   }
 }
 
