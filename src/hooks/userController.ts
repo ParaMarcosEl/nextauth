@@ -23,8 +23,8 @@ export function useUserController() {
       if (!res.ok) throw new Error("Failed to fetch user");
       const data: User = await res.json();
       return data;
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "An unknown error occurred");
       return null;
     } finally {
       setLoading(false);
@@ -43,18 +43,15 @@ export function useUserController() {
       if (!res.ok) throw new Error("Failed to create user");
       const data: User = await res.json();
       return data;
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "An unknown error occurred");
       return null;
     } finally {
       setLoading(false);
     }
   };
 
-  const updateUser = async (
-    id: string,
-    updates: UpdateUserDTO
-  ): Promise<User | null> => {
+  const updateUser = async (id: string, updates: UpdateUserDTO): Promise<User | null> => {
     setLoading(true);
     setError(null);
     try {
@@ -66,8 +63,8 @@ export function useUserController() {
       if (!res.ok) throw new Error("Failed to update user");
       const data: User = await res.json();
       return data;
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "An unknown error occurred");
       return null;
     } finally {
       setLoading(false);
@@ -83,8 +80,8 @@ export function useUserController() {
       });
       if (!res.ok) throw new Error("Failed to delete user");
       return true;
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "An unknown error occurred");
       return false;
     } finally {
       setLoading(false);
