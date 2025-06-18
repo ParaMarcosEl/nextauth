@@ -19,7 +19,7 @@ export default function SignInForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {},
   } = useForm<FormData>();
 
   useEffect(() => {
