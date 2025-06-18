@@ -1,35 +1,78 @@
 "use client";
 
-import { getProviders, signIn } from "next-auth/react";
-import { useEffect, useState } from "react";
-import { ClientSafeProvider } from "next-auth/react";
+import { useForm } from "react-hook-form";
+import { signIn } from "next-auth/react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 
+type FormData = {
+  email: string;
+  password: string;
+};
 
+export default function SignInPage() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
 
-export default function SignIn() {
-  const [providers, setProviders] = useState<Record<string, ClientSafeProvider> | null>(null);
+  const [error, setError] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    (async () => {
-      const res = await getProviders();
-      setProviders(res);
-    })();
-  }, []);
+    const errorParam = searchParams.get("error");
+    if (errorParam === "CredentialsSignin") {
+      setError("Invalid email or password.");
+    } else if (errorParam) {
+      setError("An error occurred. Please try again.");
+    }
+  }, [searchParams]);
+
+  const onSubmit = async (data: FormData) => {
+    const res = await signIn("credentials", {
+      redirect: false,
+      email: data.email,
+      password: data.password,
+    });
+
+    if (res?.ok) {
+      router.push("/dashboard");
+    } else {
+      setError("Invalid credentials");
+    }
+  };
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">Sign In</h1>
-      {providers &&
-        Object.values(providers!).map((provider) => ( 
-          <div key={provider.name}>
-            <button
-              onClick={() => signIn(provider.id)}
-              className="p-2 bg-blue-500 text-white rounded"
-            >
-              Sign in with {provider.name}
-            </button>
-          </div>
-        ))}
+    <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
+      <h2>Sign In</h2>
+
+      <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <input placeholder="Email" {...register("email", { required: true })} />
+        {errors.email && <span>Email is required</span>}
+
+        <input type="password" placeholder="Password" {...register("password", { required: true })} />
+        {errors.password && <span>Password is required</span>}
+
+        <button type="submit">Sign In</button>
+      </form>
+
+      {error && <p style={{ color: "red", marginTop: 10 }}>{error}</p>}
+
+      <hr style={{ margin: "20px 0" }} />
+
+      <button onClick={() => signIn("google")}>
+        Sign in with Google
+      </button>
+
+      <p style={{ marginTop: 16 }}>
+        Don’t have an account?{" "}
+        <Link href="/register" style={{ color: "blue", textDecoration: "underline" }}>
+          Register here
+        </Link>
+      </p>
     </div>
   );
 }
