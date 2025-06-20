@@ -1,12 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-// Get single user
+// GET /api/users/:id
 export async function GET(
-  _: NextRequest,
-  { params }: { params: { id: string } }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  req: NextRequest,
+  context: { params: { id: string } }
 ) {
-  const user = await prisma.user.findUnique({ where: { id: params.id } });
+  const user = await prisma.user.findUnique({
+    where: { id: context.params.id },
+  });
 
   if (!user) {
     return NextResponse.json({ error: "User not found" }, { status: 404 });
@@ -15,33 +18,50 @@ export async function GET(
   return NextResponse.json(user);
 }
 
-// Update user
+// PUT /api/users/:id
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
-  const data = await req.json();
-
   try {
-    const updated = await prisma.user.update({
-      where: { id: params.id },
-      data,
+    const body = await req.json();
+
+    const updatedUser = await prisma.user.update({
+      where: { id: context.params.id },
+      data: {
+        name: body.name,
+        email: body.email,
+        // include other fields if needed
+      },
     });
-    return NextResponse.json(updated);
-  } catch {
-    return NextResponse.json({ error: "Failed to update user" }, { status: 500 });
+
+    return NextResponse.json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { error: "Failed to update user" },
+      { status: 500 }
+    );
   }
 }
 
-// Delete user
+// DELETE /api/users/:id
 export async function DELETE(
-  _: NextRequest,
-  { params }: { params: { id: string } }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  req: NextRequest,
+  context: { params: { id: string } }
 ) {
   try {
-    await prisma.user.delete({ where: { id: params.id } });
+    await prisma.user.delete({
+      where: { id: context.params.id },
+    });
+
     return NextResponse.json({ success: true });
-  } catch {
-    return NextResponse.json({ error: "Failed to delete user" }, { status: 500 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { error: "Failed to delete user" },
+      { status: 500 }
+    );
   }
 }
