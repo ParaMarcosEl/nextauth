@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 
 // GET /api/users/:id
 export async function GET(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  req: NextRequest,
   context: { params: { id: string } }
 ) {
   const user = await prisma.user.findUnique({
@@ -45,6 +47,8 @@ export async function PUT(
 
 // DELETE /api/users/:id
 export async function DELETE(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  req: NextRequest,
   context: { params: { id: string } }
 ) {
   try {
