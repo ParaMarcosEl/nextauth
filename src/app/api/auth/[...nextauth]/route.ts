@@ -33,10 +33,24 @@ const authOptions: NextAuthOptions = {
           user.password
         );
 
-        return isValid ? user : null;
+        return isValid 
+          ? {
+              id: user.id,
+              email: user.email,
+              name: user.name || null,
+            } 
+          : null;
       },
     }),
   ],
+  callbacks: {
+    async session({ session, token }) {
+      if (session?.user && token?.sub) {
+        session.user.id = token.sub; // sub is the user ID in most providers
+      }
+      return session;
+    },
+  },
   pages: {
     signIn: "/signin",
   },

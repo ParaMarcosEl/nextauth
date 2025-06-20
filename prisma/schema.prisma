@@ -22,6 +22,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  createdAt     DateTime?
+  updatedAt     DateTime?
 }
 
 model Account {

@@ -1,35 +1,10 @@
-"use client";
+import { Suspense } from "react";
+import SignInForm from "./signinForm";
 
-import { getProviders, signIn } from "next-auth/react";
-import { useEffect, useState } from "react";
-import { ClientSafeProvider } from "next-auth/react";
-
-
-
-export default function SignIn() {
-  const [providers, setProviders] = useState<Record<string, ClientSafeProvider> | null>(null);
-
-  useEffect(() => {
-    (async () => {
-      const res = await getProviders();
-      setProviders(res);
-    })();
-  }, []);
-
+export default function SignInPage() {
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">Sign In</h1>
-      {providers &&
-        Object.values(providers!).map((provider) => ( 
-          <div key={provider.name}>
-            <button
-              onClick={() => signIn(provider.id)}
-              className="p-2 bg-blue-500 text-white rounded"
-            >
-              Sign in with {provider.name}
-            </button>
-          </div>
-        ))}
-    </div>
+    <Suspense fallback={<div>Loading sign-in form...</div>}>
+      <SignInForm />
+    </Suspense>
   );
 }
