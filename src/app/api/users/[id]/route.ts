@@ -3,8 +3,7 @@ import { prisma } from "@/lib/prisma";
 
 // GET /api/users/:id
 export async function GET(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  req: NextRequest,
+  _req: NextRequest,
   context: { params: { id: string } }
 ) {
   const user = await prisma.user.findUnique({
