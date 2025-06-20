@@ -7,8 +7,9 @@ export async function GET(
   req: NextRequest,
   context: { params: { id: string } }
 ) {
+  const {id} = await context.params; 
   const user = await prisma.user.findUnique({
-    where: { id: context.params.id },
+    where: { id },
   });
 
   if (!user) {
@@ -25,9 +26,9 @@ export async function PUT(
 ) {
   try {
     const body = await req.json();
-
+    const {id} = await context.params;
     const updatedUser = await prisma.user.update({
-      where: { id: context.params.id },
+      where: { id },
       data: {
         name: body.name,
         email: body.email,
