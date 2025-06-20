@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 // GET /api/users
-export async function GET(_req: NextRequest) {
+export async function GET() {
   try {
     const users = await prisma.user.findMany({
       select: {
