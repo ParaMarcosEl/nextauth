@@ -22,7 +22,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  createdAt     DateTime
+  createdAt     DateTime?
   updatedAt     DateTime?
 }
 
