@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 // GET /api/users
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 export async function GET(req: NextRequest) {
   try {
     const users = await prisma.user.findMany({
