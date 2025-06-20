@@ -1,13 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+type tParams = Promise<{ id: string }>;
+
 // GET /api/users/:id
 export async function GET(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   req: NextRequest,
-  context: { params: { id: string } }
+  context: { params: tParams }
 ) {
-  const {id} = await context.params; 
+  const { id } = await context.params; 
   const user = await prisma.user.findUnique({
     where: { id },
   });
@@ -22,7 +24,7 @@ export async function GET(
 // PUT /api/users/:id
 export async function PUT(
   req: NextRequest,
-  context: { params: { id: string } }
+  context: { params: tParams }
 ) {
   try {
     const body = await req.json();
@@ -50,11 +52,12 @@ export async function PUT(
 export async function DELETE(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   req: NextRequest,
-  context: { params: { id: string } }
+  context: { params: tParams }
 ) {
   try {
+    const { id } = await context.params;
     await prisma.user.delete({
-      where: { id: context.params.id },
+      where: { id },
     });
 
     return NextResponse.json({ success: true });
