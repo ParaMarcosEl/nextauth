@@ -30,7 +30,7 @@ export default function DashboardPage() {
             Welcome{user?.name ? `, ${user.name}` : ""}!
           </h2>
           <p className="text-gray-600">
-            You're signed in with <strong>{user?.email}</strong>
+            You&apos;re signed in with <strong>{user?.email}</strong>
           </p>
         </div>
 
