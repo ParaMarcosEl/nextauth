@@ -1,4 +1,3 @@
-// src/app/register/page.tsx
 "use client";
 
 import { useForm } from "react-hook-form";
@@ -6,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema, RegisterSchema } from "@/lib/validation/registerSchema";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function RegisterPage() {
@@ -23,7 +23,7 @@ export default function RegisterPage() {
   const onSubmit = async (data: RegisterSchema) => {
     setServerError("");
 
-    const res = await fetch("/api/register", {
+    const res = await fetch("/api/users", {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -36,7 +36,6 @@ export default function RegisterPage() {
       return;
     }
 
-    // Auto-login user after registration
     const signInResult = await signIn("credentials", {
       redirect: false,
       email: data.email,
@@ -51,18 +50,50 @@ export default function RegisterPage() {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <input type="email" placeholder="Email" {...register("email")} />
-        {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
+    <div className="page min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-md">
+        <h1 className="text-2xl font-bold mb-6 text-center">Create an Account</h1>
 
-        <input type="password" placeholder="Password" {...register("password")} />
-        {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div>
+            <input
+              type="email"
+              placeholder="Email"
+              {...register("email")}
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            {errors.email && <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>}
+          </div>
 
-        <button type="submit">Register</button>
-        {serverError && <p style={{ color: "red" }}>{serverError}</p>}
-      </form>
+          <div>
+            <input
+              type="password"
+              placeholder="Password"
+              {...register("password")}
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            {errors.password && <p className="text-sm text-red-600 mt-1">{errors.password.message}</p>}
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition"
+          >
+            Register
+          </button>
+
+          {serverError && (
+            <p className="text-sm text-red-600 mt-2 text-center">{serverError}</p>
+          )}
+        </form>
+
+        <p className="mt-6 text-center text-sm">
+          Already have an account?{" "}
+          <Link href="/signin" className="text-indigo-600 hover:underline">
+            Sign In here
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

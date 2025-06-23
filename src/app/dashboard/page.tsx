@@ -1,9 +1,9 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authOptions";
+"use client"
+import { useUser } from "@/hooks/useUser";
 
-export default async function Dashboard() {
-  const session = await getServerSession(authOptions);
-  if (!session) return <div>Not authorized</div>;
+export default function Dashboard() {
+  const user = useUser();
+  if (!user) return <div>Not authorized</div>;
 
-  return <div>Welcome, {session.user?.email}!</div>;
+  return <div>Welcome, {user?.email}!</div>;
 }
