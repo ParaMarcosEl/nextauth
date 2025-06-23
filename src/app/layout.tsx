@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ReduxProvider } from "@/app/ReduxProvider";
-
+import { AlertProvider } from "@/context/AlertContext";
 import SessionSync from "@/components/sessionSync";
 import Navigation from "@/app/navigation/navigation";
 import "./globals.css";
@@ -35,9 +35,11 @@ export default function RootLayout({
       >
         <AuthProvider>
         <ReduxProvider>
-          <SessionSync />
-          <Navigation />
-          <main>{children}</main>
+          <AlertProvider>
+            <SessionSync />
+            <Navigation />
+            <main>{children}</main>
+          </AlertProvider>
         </ReduxProvider>
         </AuthProvider>
       </body>

@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useAlert } from "@/context/AlertContext";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { useDispatch } from "react-redux";
@@ -15,6 +16,7 @@ type FormData = {
 };
 
 export default function SignInForm() {
+  const { setAlert } = useAlert();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [error, setError] = useState("");
@@ -43,15 +45,16 @@ export default function SignInForm() {
     });
 
     if (res?.ok) {
-    // Get session info from NextAuth
-    const session = await getSession();
+      // Get session info from NextAuth
+      const session = await getSession();
         if (session?.user && session.user.email) {
-        const userData = {
-            id: session.user.id || "", // Add this via session callback if needed
-            name: session.user.name || "",
-            email: session.user.email
-        };
-        dispatch(setUser(userData));
+          setAlert({ type: "success", message: `You have successfully logged in.`})
+          const userData = {
+              id: session.user.id || "", // Add this via session callback if needed
+              name: session.user.name || "",
+              email: session.user.email
+          };
+          dispatch(setUser(userData));
         }
       router.push("/dashboard");
     } else {
