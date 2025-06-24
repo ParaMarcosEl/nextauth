@@ -13,7 +13,7 @@ export default function NavBar() {
 
           {/* Logo */}
           <Link href="/" className="text-xl font-bold tracking-wide">
-            MyApp
+            Para El | NodeJS
           </Link>
 
           {/* Desktop Menu */}
