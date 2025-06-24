@@ -70,11 +70,10 @@ const authOptions: NextAuthOptions = {
       return true; // allow sign in
     },
 
-    async session({ session, token }) {
+    async session({ session }) {
       const dbUser = await prisma.user.findUnique({
         where: { email: session.user?.email ?? "" },
       });
-
       if (session.user && dbUser) {
         session.user.id = dbUser.id;
         // Add any custom fields you'd like to access
