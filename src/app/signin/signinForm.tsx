@@ -95,18 +95,12 @@ export default function SignInForm() {
           >
             Sign In
           </button>
-
+            <div className="text-center" >or</div>
           <button
-            type="button"
-            onClick={() => signIn("google")}
-            className="w-full py-2 px-4 bg-white text-gray-800 border border-gray-300 rounded-md hover:bg-gray-100 transition flex items-center justify-center gap-2"
+            onClick={() => signIn("github")}
+            className="mt-4 w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-700"
           >
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M21.35 11.1H12v2.92h5.35c-.23 1.22-1.42 3.6-5.35 3.6-3.21 0-5.83-2.63-5.83-5.86s2.62-5.86 5.83-5.86c1.83 0 3.05.78 3.75 1.45l2.56-2.48C16.66 3.83 14.5 3 12 3 6.77 3 2.65 7.13 2.65 12.34s4.12 9.34 9.35 9.34c5.4 0 8.95-3.79 8.95-9.12 0-.61-.06-1.08-.2-1.46z"
-              />
-            </svg>
-            Sign in with Google
+            Sign in with GitHub
           </button>
         </form>
 
