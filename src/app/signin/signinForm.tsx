@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { useAlert } from "@/context/AlertContext";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/lib/slices/userSlice";
+import { getSession } from "next-auth/react";
 import Link from "next/link";
 
 type FormData = {
@@ -17,6 +20,7 @@ export default function SignInForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [error, setError] = useState("");
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -41,7 +45,17 @@ export default function SignInForm() {
     });
 
     if (res?.ok) {
-      setAlert({ type: "success", message: `You have successfully logged in.`})
+      // Get session info from NextAuth
+      const session = await getSession();
+        if (session?.user && session.user.email) {
+          setAlert({ type: "success", message: `You have successfully logged in.`})
+          const userData = {
+              id: session.user.id || "", // Add this via session callback if needed
+              name: session.user.name || "",
+              email: session.user.email
+          };
+          dispatch(setUser(userData));
+        }
       router.push("/dashboard");
     } else {
       setError("Invalid credentials");
