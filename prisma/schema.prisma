@@ -9,8 +9,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite" // Change to "postgresql" for prod
-  url      = "file:./dev.db"
+  provider = "postgresql" // Change to "postgresql" for prod
+  url      = env("DATABASE_URL")
 }
 
 model User {
