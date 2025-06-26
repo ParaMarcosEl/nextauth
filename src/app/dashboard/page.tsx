@@ -3,14 +3,20 @@
 import { useUser } from "@/hooks/useUser";
 import { useAlert } from "@/context/AlertContext";
 import Redirector from "@/components/redirector";
+import SearchBar from "@/components/searchbar";
 import { signOut } from "next-auth/react";
+import StockCard from "@/components/stockCard";
+import { useAppSelector } from "@/hooks/redux";
 
 export default function DashboardPage() {
   const user = useUser();
   const { setAlert } = useAlert();
+  const savedCards = useAppSelector((state) => state.dashboard.savedCards);
+  const searchCard = useAppSelector((state) => state.dashboard.searchCard);
+
   return (
     <Redirector>
-      <main className="min-h-screen bg-gray-50 px-6 py-10">
+      <main className="page min-h-screen bg-gray-50 px-6 py-10">
         <div className="max-w-6xl mx-auto space-y-8">
           {/* Header */}
           <div className="flex justify-between items-center">
@@ -18,7 +24,10 @@ export default function DashboardPage() {
             <button
               onClick={() => {
                 signOut();
-                setAlert({ type: "info", message: "You have successfully logged out."});
+                setAlert({
+                  type: "info",
+                  message: "You have successfully logged out.",
+                });
               }}
               className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
             >
@@ -36,23 +45,24 @@ export default function DashboardPage() {
             </p>
           </div>
 
-          {/* Example Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-white p-5 shadow rounded-xl">
-              <h3 className="text-lg font-semibold text-indigo-600">Your Activity</h3>
-              <p className="text-gray-600 mt-2">No recent activity.</p>
-            </div>
+          {/* Search */}
+          <SearchBar />
 
-            <div className="bg-white p-5 shadow rounded-xl">
-              <h3 className="text-lg font-semibold text-indigo-600">Stats</h3>
-              <p className="text-gray-600 mt-2">Coming soon...</p>
+          {/* Search Result Card (if not saved) */}
+          {searchCard && !savedCards.includes(searchCard) && (
+            <div className="mt-4">
+              <StockCard symbol={searchCard} />
             </div>
+          )}
 
-            <div className="bg-white p-5 shadow rounded-xl">
-              <h3 className="text-lg font-semibold text-indigo-600">Settings</h3>
-              <p className="text-gray-600 mt-2">Manage your preferences.</p>
+          {/* Saved Stock Cards */}
+          {savedCards.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {savedCards.map((symbol) => (
+                <StockCard key={symbol} symbol={symbol} />
+              ))}
             </div>
-          </div>
+          )}
         </div>
       </main>
     </Redirector>
