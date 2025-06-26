@@ -30,9 +30,14 @@ export default function StockCard({ symbol, saved = false }: StockCardProps) {
         if (!res.ok) throw new Error(result.error || "Failed to fetch");
 
         setData(result.data);
-      } catch (err: any) {
-        console.log({err});
-        setError(err.message);
+      }catch (err: unknown) {
+        if (err instanceof Error) {
+            console.log({ err });
+            setError(err.message);
+        } else {
+            console.log("Unknown error", err);
+            setError("An unknown error occurred");
+        }
       } finally {
         setLoading(false);
       }
