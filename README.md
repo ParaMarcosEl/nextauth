@@ -58,15 +58,15 @@ A modern stock tracking dashboard built with **Next.js**, **Prisma**, and **Rech
 ```bash
 git clone https://github.com/your-username/your-repo.git
 cd your-repo
-
+```
 ### 2. Install Dependencies
-
+```bash
 npm install
 # or
 yarn install
-
+```
 ### 3. Set environment variables
-
+```bash
 DATABASE_URL=postgresql://your-user:password@localhost:5432/yourdb
 NEXTAUTH_SECRET=your_secret
 NEXTAUTH_URL=http://localhost:3000
@@ -77,17 +77,18 @@ GITHUB_SECRET=your_github_client_secret
 
 # Polygon.io API
 POLYGON_API_KEY=your_polygon_api_key
-
+```
 ### 4. Set up database
-
+```bash
 npx prisma generate
 npx prisma migrate dev --name init
-
+```
 ### 5. Run the app
+```bash
 npm run dev
 # or
 yarn dev
-
+```
 ✨ Deployment
 This app is deployed on [Vercel](https://nextauth-google-lake.vercel.app).
 
