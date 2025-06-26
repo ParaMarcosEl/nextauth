@@ -5,9 +5,11 @@ type PolygonResult = {
     c: number;
 };
 
+type tParams = Promise<{ symbol: string }>;
+
 export async function GET(// eslint-disable-next-line @typescript-eslint/no-unused-vars
     req: NextRequest,
-    context: { params: { symbol: string } }
+    context: { params: tParams }
 ) {
     const param = await context.params;
     const symbol = param.symbol.toUpperCase();
