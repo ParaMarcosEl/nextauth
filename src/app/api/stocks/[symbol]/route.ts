@@ -2,6 +2,11 @@
 
 import { NextRequest, NextResponse } from "next/server";
 
+type PolygonResult = {
+  t: number; // timestamp in ms
+  c: number; // closing price
+};
+
 export async function GET(
   _req: NextRequest,
   context: { params: { symbol: string } }
@@ -31,7 +36,7 @@ export async function GET(
       return NextResponse.json({ error: json.error || "Invalid symbol" }, { status: 400 });
     }
 
-    const data = json.results.map((item: any) => ({
+    const data = (json.results as PolygonResult[]).map((item) => ({
       date: new Date(item.t).toLocaleDateString("en-US", {
         month: "short",
         day: "numeric",
@@ -40,7 +45,7 @@ export async function GET(
     }));
 
     return NextResponse.json({ data });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ error: "Failed to fetch stock data" }, { status: 500 });
   }
 }
