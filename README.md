@@ -89,6 +89,6 @@ npm run dev
 yarn dev
 
 ✨ Deployment
-This app is deployed on [Vercel](https://nextauth-google-lake.vercel.app/dashboard).
+This app is deployed on [Vercel](https://nextauth-google-lake.vercel.app).
 
 Make sure to set the same environment variables in your Vercel project settings.
