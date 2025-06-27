@@ -6,13 +6,28 @@ import Redirector from "@/components/redirector";
 import SearchBar from "@/components/searchbar";
 import { signOut } from "next-auth/react";
 import StockCard from "@/components/stockCard";
-import { useAppSelector } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import { useFavorites } from "@/hooks/useFavorites";
+import { fetchUserFavorites, Stock } from "@/lib/slices/favoritesSlice";
+import { useEffect } from "react";
 
 export default function DashboardPage() {
-  const user = useUser();
+  const { user } = useUser();
+  const dispatch = useAppDispatch();
+  const {
+  saved,
+  fetchFavorites,
+} = useFavorites();
+
+  useEffect(() => {
+    if (user?.id) {
+      fetchFavorites(user.id);
+    }
+  }, [user?.id, dispatch]);
+
   const { setAlert } = useAlert();
-  const savedCards = useAppSelector((state) => state.dashboard.savedCards);
   const searchCard = useAppSelector((state) => state.dashboard.searchCard);
+  console.log({ searchCard, saved });
 
   return (
     <Redirector>
@@ -43,23 +58,34 @@ export default function DashboardPage() {
             <p className="text-gray-600">
               You&apos;re signed in with <strong>{user?.email}</strong>
             </p>
+
+            {/* Instructions Section */}
+            <div className="bg-blue-50 border-l-4 border-blue-400 text-blue-800 p-4 rounded-xl">
+              <h3 className="font-semibold text-lg mb-1">How to Use Your Dashboard</h3>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                <li>Use the <strong>search bar</strong> below to look up stock symbols (e.g. AAPL, MSFT).</li>
+                <li>A chart will appear for your selected stock. You can click <strong>"Save"</strong> to pin it to your dashboard.</li>
+                <li>Saved stocks are <strong>persistent</strong> and will always show up when you return.</li>
+                <li>You can <strong>delete</strong> a saved stock anytime by clicking the "Remove" button on its card.</li>
+              </ul>
+            </div>
           </div>
 
           {/* Search */}
           <SearchBar />
 
           {/* Search Result Card (if not saved) */}
-          {searchCard && !savedCards.includes(searchCard) && (
+          {searchCard && !saved.find((card) => card.symbol === searchCard) && (
             <div className="mt-4">
               <StockCard symbol={searchCard} />
             </div>
           )}
 
           {/* Saved Stock Cards */}
-          {savedCards.length > 0 && (
+          {saved.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {savedCards.map((symbol) => (
-                <StockCard key={symbol} symbol={symbol} />
+              {saved.map(({ symbol }) => (
+                <StockCard key={symbol} symbol={symbol} saved />
               ))}
             </div>
           )}

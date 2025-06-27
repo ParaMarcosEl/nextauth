@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { userSlice } from "@/lib/slices/userSlice";
 
 import dashboardReducer from '@/lib/slices/dashboardSlice';
+import favoritesReducer from '@/lib/slices/favoritesSlice';
 
 export const store = configureStore({
   reducer: {
     user: userSlice.reducer,
-    dashboard: dashboardReducer
+    dashboard: dashboardReducer,
+    favorites: favoritesReducer,
   },
 });
 

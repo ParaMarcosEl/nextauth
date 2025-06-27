@@ -15,7 +15,7 @@ export default function Redirector({ children }: RedirectorProps) {
   const router = useRouter();
   const pathname = usePathname();
   const { setAlert } = useAlert();
-  const user = useUser();
+  const { user } = useUser();
 
   const { data: session, status } = useSession();
   const [loading, setLoading] = useState(true);
