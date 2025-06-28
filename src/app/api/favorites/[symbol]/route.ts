@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/authOptions";
 import { prisma } from "@/lib/prisma";
 
 type tParams = {
-  symbol: String
+  symbol: string
 }
 export async function DELETE(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
