@@ -28,7 +28,7 @@ export default function AboutPage() {
             I&apos;m a seasoned full-stack engineer who thrives on solving complex problems with clean, modern code. I enjoy planning to the end, staying organized, and managing technical risk. I&apos;m passionate about building polished, scalable web applications and taking ideas from concept to production.
           </p>
           <p className="mt-4">
-            My experience spans e-commerce, health tech, enterprise platforms, and data visualization, where I&apos;ve led front-end architecture, mentored engineers, and integrated everything from GraphQL APIs to cloud services. I build with React, Next.js, TypeScript, and Node.js — but I've never met a tech stack I couldn't navigate.
+            My experience spans e-commerce, health tech, enterprise platforms, and data visualization, where I&apos;ve led front-end architecture, mentored engineers, and integrated everything from GraphQL APIs to cloud services. I build with React, Next.js, TypeScript, and Node.js — but I&apos;ve never met a tech stack I couldn&apos;t navigate.
           </p>
         </section>
 
