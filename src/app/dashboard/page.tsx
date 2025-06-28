@@ -8,7 +8,6 @@ import { signOut } from "next-auth/react";
 import StockCard from "@/components/stockCard";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useFavorites } from "@/hooks/useFavorites";
-import { fetchUserFavorites, Stock } from "@/lib/slices/favoritesSlice";
 import { useEffect } from "react";
 
 export default function DashboardPage() {
@@ -62,9 +61,9 @@ export default function DashboardPage() {
             <div className="bg-blue-50 border-l-4 border-blue-400 text-blue-800 p-4 rounded-xl">
               <ul className="list-disc list-inside text-sm space-y-1">
                 <li>Use the <strong>search bar</strong> below to look up stock symbols (e.g. AAPL, MSFT).</li>
-                <li>A chart will appear for your selected stock. You can click <strong>"Save"</strong> to pin it to your dashboard.</li>
+                <li>A chart will appear for your selected stock. You can click <strong>&quot;Save&quot;</strong> to pin it to your dashboard.</li>
                 <li>Saved stocks are <strong>persistent</strong> and will always show up when you return.</li>
-                <li>You can <strong>delete</strong> a saved stock anytime by clicking the "Remove" button on its card.</li>
+                <li>You can <strong>delete</strong> a saved stock anytime by clicking the &quot;Remove&quot; button on its card.</li>
               </ul>
             </div>
           </div>

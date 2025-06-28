@@ -25,10 +25,10 @@ export default function AboutPage() {
         </div>
         <section className="text-lg leading-relaxed">
           <p>
-            I’m a seasoned full-stack engineer who thrives on solving complex problems with clean, modern code. I enjoy planning to the end, staying organized, and managing technical risk. I’m passionate about building polished, scalable web applications and taking ideas from concept to production.
+            I&apos;m a seasoned full-stack engineer who thrives on solving complex problems with clean, modern code. I enjoy planning to the end, staying organized, and managing technical risk. I&apos;m passionate about building polished, scalable web applications and taking ideas from concept to production.
           </p>
           <p className="mt-4">
-            My experience spans e-commerce, health tech, enterprise platforms, and data visualization, where I’ve led front-end architecture, mentored engineers, and integrated everything from GraphQL APIs to cloud services. I build with React, Next.js, TypeScript, and Node.js — but I've never met a tech stack I couldn't navigate.
+            My experience spans e-commerce, health tech, enterprise platforms, and data visualization, where I&apos;ve led front-end architecture, mentored engineers, and integrated everything from GraphQL APIs to cloud services. I build with React, Next.js, TypeScript, and Node.js — but I've never met a tech stack I couldn't navigate.
           </p>
         </section>
 
@@ -59,7 +59,7 @@ export default function AboutPage() {
             <li>General Assembly – Web Development Bootcamp (2017)</li>
             <li>Per Scholas – Computer Programming (2016)</li>
             <li>Katherine Gibbs – Networking & Telecommunications (2003)</li>
-            <li>Bachelor’s in Computer Science</li>
+            <li>Bachelor&apos;s in Computer Science</li>
           </ul>
         </section>
 
