@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions"; // adjust based on your setup
 
 export async function DELETE(
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
   request: Request,
   { params }: { params: { symbol: string } }
 ) {
