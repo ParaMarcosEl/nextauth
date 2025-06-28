@@ -65,7 +65,6 @@ export const fetchUserFavorites = createAsyncThunk<
   string,   // userId
   { rejectValue: string }
 >("favorites/fetchUserFavorites", async (userId, { rejectWithValue }) => {
-  console.log("fetching favorites...");
   try {
     const res = await fetch(`/api/favorites?userId=${userId}`);
     const json = await res.json();

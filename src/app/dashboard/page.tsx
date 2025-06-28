@@ -27,7 +27,6 @@ export default function DashboardPage() {
 
   const { setAlert } = useAlert();
   const searchCard = useAppSelector((state) => state.dashboard.searchCard);
-  console.log({ searchCard, saved });
 
   return (
     <Redirector>
@@ -61,7 +60,6 @@ export default function DashboardPage() {
 
             {/* Instructions Section */}
             <div className="bg-blue-50 border-l-4 border-blue-400 text-blue-800 p-4 rounded-xl">
-              <h3 className="font-semibold text-lg mb-1">How to Use Your Dashboard</h3>
               <ul className="list-disc list-inside text-sm space-y-1">
                 <li>Use the <strong>search bar</strong> below to look up stock symbols (e.g. AAPL, MSFT).</li>
                 <li>A chart will appear for your selected stock. You can click <strong>"Save"</strong> to pin it to your dashboard.</li>

@@ -20,9 +20,17 @@ export async function GET(// eslint-disable-next-line @typescript-eslint/no-unus
     }
 
     try {
-        const res = await fetch(
-        `https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/day/2024-06-01/2024-06-25?adjusted=true&sort=desc&limit=30&apiKey=${apiKey}`
-        );
+        const today = new Date();
+        const pastDate = new Date();
+        pastDate.setDate(today.getDate() - 30);
+
+        const formatDate = (date: Date) =>
+        date.toISOString().split("T")[0]; // YYYY-MM-DD
+
+        const from = formatDate(pastDate);
+        const to = formatDate(today);
+
+        const res = await fetch(`https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/day/${from}/${to}?adjusted=true&sort=desc&limit=30&apiKey=${apiKey}`);
         const json = await res.json();
 
         if (!json.results) {
