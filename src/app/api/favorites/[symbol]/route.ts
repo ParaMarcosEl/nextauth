@@ -1,16 +1,16 @@
 // src/app/api/favorites/[symbol]/route.ts
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import { prisma } from "@/lib/prisma";
 
 export async function DELETE(
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  req: NextRequest,
-  { params }: { params: { symbol: string } }
+  req: Request,
+  context: { params: { symbol: string } }
 ) {
   const session = await getServerSession(authOptions);
-  const symbol = params.symbol?.toUpperCase();
+  const symbol = context.params.symbol?.toUpperCase();
 
   if (!session?.user?.email) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

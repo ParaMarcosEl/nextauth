@@ -46,7 +46,6 @@ export async function POST(req: NextRequest) {
   const existing = await prisma.favoriteStock.findFirst({
     where: { symbol, userId: user.id },
   });
-  console.log({existing});
 
   if (existing) {
     return NextResponse.json({ message: "Stock already in favorites" }, { status: 200 });
@@ -59,6 +58,6 @@ export async function POST(req: NextRequest) {
       userId: user.id,
     },
   });
-  console.log({ favorite });
+  
   return NextResponse.json({ favorite });
 }
