@@ -29,7 +29,6 @@ export default function StockCard({ symbol }: Props) {
         setLoading(true);
         const res = await fetch(`/api/stocks/${symbol}`);
         const json = await res.json();
-
         if (!res.ok) throw new Error(json.error || "Failed to fetch");
 
         setData(json.data);
