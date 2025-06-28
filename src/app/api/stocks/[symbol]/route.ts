@@ -5,10 +5,12 @@ import { prisma } from "@/lib/prisma"; // adjust if your path is different
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions"; // adjust based on your setup
 
+type tParams = Promise<{ symbol: string }>;
+
 export async function DELETE(
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
   request: Request,
-  { params }: { params: { symbol: string } }
+  { params }: { params: tParams }
 ) {
   const session = await getServerSession(authOptions);
 
@@ -28,7 +30,7 @@ export async function DELETE(
     const deleted = await prisma.favoriteStock.deleteMany({
       where: {
         userId: user.id,
-        symbol: params.symbol.toUpperCase(),
+        symbol: (await params).symbol.toUpperCase(),
       },
     });
 
