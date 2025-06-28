@@ -4,10 +4,13 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import { prisma } from "@/lib/prisma";
 
+type tParams = {
+  symbol: String
+}
 export async function DELETE(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   req: Request,
-  { params }: { params: { symbol: string } }
+  { params }: { params: tParams }
 ) {
   const session = await getServerSession(authOptions);
   const symbol = params.symbol?.toUpperCase();
