@@ -7,10 +7,10 @@ import { prisma } from "@/lib/prisma";
 export async function DELETE(
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
   req: Request,
-  context: { params: { symbol: string } }
+  { params }: { params: { symbol: string } }
 ) {
   const session = await getServerSession(authOptions);
-  const symbol = context.params.symbol?.toUpperCase();
+  const symbol = params.symbol?.toUpperCase();
 
   if (!session?.user?.email) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
