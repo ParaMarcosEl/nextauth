@@ -4,16 +4,15 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import { prisma } from "@/lib/prisma";
 
-type tParams = {
-  symbol: string
-}
+type tParams = Promise<{ symbol: string }>;
+
 export async function DELETE(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   req: Request,
   { params }: { params: tParams }
 ) {
   const session = await getServerSession(authOptions);
-  const symbol = params.symbol?.toUpperCase();
+  const symbol = (await params).symbol.toUpperCase(); 
 
   if (!session?.user?.email) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
