@@ -3,7 +3,6 @@
 
 import { useEffect, useState, ReactNode } from 'react';
 import { useAlert } from '@/context/AlertContext';
-import { useUser } from '@/hooks/useUser';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 
