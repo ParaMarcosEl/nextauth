@@ -1,8 +1,11 @@
-const fs = require("fs");
-const path = require("path");
+/* eslint-env node */
+
+import fs from "fs";
+import path from "path";
+import { ethers } from "hardhat"; // ✅ Correct import
 
 async function main() {
-  const [deployer] = await ethers.getSigners();
+//   const [deployer] = await ethers.getSigners();
   const StockNFT = await ethers.getContractFactory("StockNFT");
   const stockNFT = await StockNFT.deploy();
 
