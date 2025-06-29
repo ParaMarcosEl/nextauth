@@ -12,7 +12,7 @@ const metadata = {
   url: 'https://reown.com/appkit', // origin must match your domain & subdomain
   icons: ['https://assets.reown.com/reown-profile-pic.png']
 }
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const walletKit = await WalletKit.init({
   core, // <- pass the shared 'core' instance
   metadata
