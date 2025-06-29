@@ -3,7 +3,6 @@
 
 import { useEffect, useState, ReactNode } from 'react';
 import { useAlert } from '@/context/AlertContext';
-import { useUser } from '@/hooks/useUser';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 
@@ -15,7 +14,6 @@ export default function Redirector({ children }: RedirectorProps) {
   const router = useRouter();
   const pathname = usePathname();
   const { setAlert } = useAlert();
-  const { user } = useUser();
 
   const { data: session, status } = useSession();
   const [loading, setLoading] = useState(true);
@@ -23,7 +21,7 @@ export default function Redirector({ children }: RedirectorProps) {
   useEffect(() => {
     if (status === 'loading') return;
 
-    if (!user?.id) {
+    if (!session?.user || !session?.user.email) {
       router.push(`/signin`);
       setAlert({ type: "error", message: "You must be signed in to view this page."});
       return;

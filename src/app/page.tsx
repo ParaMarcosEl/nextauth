@@ -30,7 +30,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto space-y-8">
 
           <section className="space-y-4">
-            <h2 className="text-2xl font-semibold text-gray-900">🧠 Purpose</h2>
+            <h2 className="text-2xl font-semibold text-gray-900"> 👑 Purpose</h2>
             <p className="text-gray-700">
               This application was created as a technical showcase for potential employers.
               It demonstrates full-stack proficiency by building a performant, feature-rich,

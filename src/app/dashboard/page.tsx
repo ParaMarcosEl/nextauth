@@ -9,14 +9,18 @@ import StockCard from "@/components/stockCard";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useEffect } from "react";
+import { useAccount } from 'wagmi';
 
 export default function DashboardPage() {
   const { user } = useUser();
   const dispatch = useAppDispatch();
   const {
-  saved,
-  fetchFavorites,
-} = useFavorites();
+    saved,
+    fetchFavorites,
+  } = useFavorites();
+  const { address, isConnected } = useAccount();
+  
+  if (isConnected) console.log({address});
 
   useEffect(() => {
     if (user?.id) {
@@ -79,12 +83,16 @@ export default function DashboardPage() {
           )}
 
           {/* Saved Stock Cards */}
+          
           {saved.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {saved.map(({ symbol }) => (
-                <StockCard key={symbol} symbol={symbol} saved />
-              ))}
-            </div>
+            <>
+              <h2>Saved Stocks</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {saved.map(({ symbol }) => (
+                  <StockCard key={symbol} symbol={symbol} saved />
+                ))}
+              </div>
+            </>
           )}
         </div>
       </main>
