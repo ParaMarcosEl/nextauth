@@ -7,6 +7,7 @@ import Navigation from "@/app/navigation/navigation";
 import "./globals.css";
 import './globals.css';
 import AuthProvider from "@/app/sessionProvider";
+import { WalletProvider } from '@/lib/walletProvider';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,15 +34,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider>
-        <ReduxProvider>
-          <AlertProvider>
-            <SessionSync />
-            <Navigation />
-            <main>{children}</main>
-          </AlertProvider>
-        </ReduxProvider>
-        </AuthProvider>
+        <WalletProvider >
+          <AuthProvider>
+            <ReduxProvider>
+              <AlertProvider>
+                <SessionSync />
+                <Navigation />
+                <main>{children}</main>
+              </AlertProvider>
+            </ReduxProvider>
+          </AuthProvider>
+        </WalletProvider>
       </body>
     </html>
   );
