@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAlert } from "@/context/AlertContext";
@@ -25,7 +25,6 @@ export default function SignInForm() {
   const {
     register,
     handleSubmit,
-    formState: {},
   } = useForm<FormData>();
 
   useEffect(() => {
