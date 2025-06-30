@@ -48,27 +48,29 @@ prisma/dev.db-journal
 .vercel
 
 # Hardhat build artifacts
-/contracts/artifacts/
-/contracts/cache/
-/contracts/typechain/
-/contracts/typechain-types/
+/contracts
+/contracts/*
+# /contracts/artifacts/
+# /contracts/cache/
+# /contracts/typechain/
+# /contracts/typechain-types/
 
-# Foundry build artifacts (if applicable)
-/contracts/out/
-/contracts/broadcast/
-/contracts/cache/
+# # Foundry build artifacts (if applicable)
+# /contracts/out/
+# /contracts/broadcast/
+# /contracts/cache/
 
-# Node dependencies
-/contracts/node_modules/
+# # Node dependencies
+# /contracts/node_modules/
 
-# Environment files
-/contracts/.env
-/contracts/.env.local
-/contracts/.env.*.local
+# # Environment files
+# /contracts/.env
+# /contracts/.env.local
+# /contracts/.env.*.local
 
-# VS Code and IDE settings (optional but common)
-/contracts/.vscode/
-/contracts/.DS_Store
+# # VS Code and IDE settings (optional but common)
+# /contracts/.vscode/
+# /contracts/.DS_Store
 
-# Deployment outputs (optional if auto-generated)
-/contracts/deployments/
+# # Deployment outputs (optional if auto-generated)
+# /contracts/deployments/
