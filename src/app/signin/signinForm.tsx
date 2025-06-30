@@ -1,7 +1,6 @@
 "use client";
-import React from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAlert } from "@/context/AlertContext";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";

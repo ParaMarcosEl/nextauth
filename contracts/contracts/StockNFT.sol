@@ -11,7 +11,7 @@ contract StockNFT is ERC721URIStorage {
         admin = msg.sender;
     }
 
-    function mint(address to, string memory uri) external {
+    function miFnt(address to, string memory uri) external {
         require(msg.sender == admin, "only admin can mint");
         _safeMint(to, nextTokenId);
         _setTokenURI(nextTokenId, uri);

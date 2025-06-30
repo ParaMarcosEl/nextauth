@@ -1,13 +1,12 @@
 "use client";
 
-import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema, RegisterSchema } from "@/lib/validation/registerSchema";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export default function RegisterPage() {
   const router = useRouter();

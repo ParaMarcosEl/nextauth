@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { setSearchCard } from '@/lib/slices/dashboardSlice';
 
