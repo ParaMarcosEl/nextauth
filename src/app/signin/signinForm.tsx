@@ -1,7 +1,6 @@
 "use client";
-
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAlert } from "@/context/AlertContext";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
@@ -25,7 +24,6 @@ export default function SignInForm() {
   const {
     register,
     handleSubmit,
-    formState: {},
   } = useForm<FormData>();
 
   useEffect(() => {

@@ -1,7 +1,6 @@
 // src/components/Redirector.tsx
 'use client';
-
-import { useEffect, useState, ReactNode } from 'react';
+import React, { useEffect, useState, ReactNode } from 'react';
 import { useAlert } from '@/context/AlertContext';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
