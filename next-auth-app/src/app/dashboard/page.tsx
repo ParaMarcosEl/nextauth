@@ -1,5 +1,4 @@
 "use client";
-
 import { useUser } from "@/hooks/useUser";
 import { useAlert } from "@/context/AlertContext";
 import Redirector from "@/components/redirector";
@@ -8,7 +7,7 @@ import { signOut } from "next-auth/react";
 import StockCard from "@/components/stockCard";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useFavorites } from "@/hooks/useFavorites";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useAccount } from 'wagmi';
 
 export default function DashboardPage() {
