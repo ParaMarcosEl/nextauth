@@ -1,10 +1,10 @@
 import { useEffect, useState, useCallback } from "react";
-import { BrowserProvider, Contract } from "ethers";
+import { BrowserProvider, Contract, Signer } from "ethers";
 import { stockNFT } from "@/lib/contract/stockNFT";
 
 export function useStockNFT() {
   const [provider, setProvider] = useState<BrowserProvider | null>(null);
-  const [signer, setSigner] = useState<unknown>(null);
+  const [signer, setSigner] = useState<Signer | null>(null);
   const [contract, setContract] = useState<Contract | null>(null);
   const [minting, setMinting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -44,9 +44,14 @@ export function useStockNFT() {
     setMinting(true);
 
     try {
-      const tx = await contract.mintNFT(metadataURI);
-      setTxHash(tx.hash);
-      await tx.wait();
+        const nextId = await contract.nextTokenId(); // returns e.g. 2
+        const tokenId = nextId - 1; // previous one is likely yours
+
+        const address = await signer?.getAddress();
+        const tx = await contract.mint(address, metadataURI);
+        setTxHash(tx.hash);
+        const val = await tx.wait();
+        console.log({ val, tokenId });
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Minting failed");
     } finally {

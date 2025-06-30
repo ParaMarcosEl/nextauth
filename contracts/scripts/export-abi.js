@@ -1,5 +1,8 @@
-import fs from "fs";
-import path from "path";
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const fs = require("fs");
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const path = require("path");
 
 async function main() {
   const artifactsDir = path.resolve(__dirname, "../artifacts/contracts");

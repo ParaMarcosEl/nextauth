@@ -1,6 +1,6 @@
 # 📊 Financial Dashboard App
 
-A modern stock tracking dashboard built with **Next.js**, **Prisma**, and **Recharts**. Authenticated users can search, view, and save their favorite stock symbols with real-time charts.
+A modern stock tracking dashboard built with **Next.js**, **Prisma**, and **Recharts** — now upgraded with **NFT minting**, **MetaMask integration**, and **smart contract deployment** via **Ethers.js** and **Hardhat**.
 
 ---
 
@@ -16,7 +16,7 @@ A modern stock tracking dashboard built with **Next.js**, **Prisma**, and **Rech
 - Search for any stock symbol (e.g., `AAPL`)
 - View daily historical stock chart via **Polygon.io**
 - Save favorite symbols to your personal dashboard
-- Realtime stock charts rendered with **Recharts**
+- Real-time stock charts rendered with **Recharts**
 
 ### 🧠 State Management
 - **Redux Toolkit** for global state:
@@ -25,12 +25,31 @@ A modern stock tracking dashboard built with **Next.js**, **Prisma**, and **Rech
   - Alerts
 
 ### 🔔 Alert System
-- Global alerts for user actions (e.g. login, logout, fetch errors)
+- Global alerts for user actions (e.g., login, logout, fetch errors)
 - Alerts auto-dismiss after a few seconds or can be closed manually
 
 ### 🛡️ Route Protection
 - Auth-required pages are protected via a **Redirector** component
 - Unauthorized users are redirected and shown alert messages
+
+---
+
+## 🌐 Web3 & NFT Integration
+
+### 🪙 Mint Stock-Based NFTs
+- Mint an NFT based on saved stock data
+- Generate metadata dynamically
+- Uses deployed smart contract with `mint()` function
+
+### 🦊 Wallet Integration
+- Connect MetaMask or WalletConnect to interact with the blockchain
+- Network detection and transaction feedback
+- Seamless contract interaction via Ethers.js
+
+### ⚙️ Smart Contract
+- Custom ERC-721 `StockNFT` contract
+- Deployed locally via Hardhat (and extensible to testnets)
+- ABI and contract address exported to frontend
 
 ---
 
@@ -42,12 +61,15 @@ A modern stock tracking dashboard built with **Next.js**, **Prisma**, and **Rech
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Recharts](https://recharts.org/) for charting
 - [Redux Toolkit](https://redux-toolkit.js.org/)
+- [RainbowKit](https://www.rainbowkit.com/) + [Wagmi](https://wagmi.sh/) + [Ethers.js](https://docs.ethers.org/)
 
 ### Backend
 - [Next.js API Routes](https://nextjs.org/docs/app/building-your-application/routing/router-handlers)
 - [Prisma ORM](https://www.prisma.io/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Polygon.io API](https://polygon.io/) for stock data
+- [Hardhat](https://hardhat.org/) for Ethereum development
+- [Solidity](https://soliditylang.org/) + [OpenZeppelin](https://docs.openzeppelin.com/)
 
 ---
 
@@ -89,6 +111,22 @@ npm run dev
 # or
 yarn dev
 ```
+🧪 Smart Contract Development
+Navigate to the /contracts directory:
+```bash
+cd contracts
+npm install
+npx hardhat compile
+npx hardhat node
+```
+In a seperate terminal, deploy locally
+```bash
+npx hardhat run scripts/deploy.ts --network localhost
+```
+This generates the ABI and contract address for frontend use.
+
+---
+
 ✨ Deployment
 This app is deployed on [Vercel](https://nextauth-google-lake.vercel.app).
 

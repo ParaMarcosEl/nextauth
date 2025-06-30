@@ -1,7 +1,10 @@
 'use client';
-
+import React from 'react';
 import { useState } from 'react';
-import Link from 'next/link';
+import Link from 'next/link';// In your layout or header component
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+
+
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,6 +25,7 @@ export default function NavBar() {
             <Link href="/signin" className="hover:text-indigo-400 transition">Sign In</Link>
             <Link href="/dashboard" className="hover:text-indigo-400 transition">Dashboard</Link>
             <Link href="/about" className="hover:text-indigo-400 transition">About</Link>
+            <ConnectButton />
           </div>
 
           {/* Mobile Menu Button */}
@@ -45,6 +49,7 @@ export default function NavBar() {
             <Link href="/signin" className="block text-white hover:text-indigo-400 transition">Sign In</Link>
             <Link href="/dashboard" className="block text-white hover:text-indigo-400 transition">Dashboard</Link>
             <Link href="/about" className="block text-white hover:text-indigo-400 transition">About</Link>
+            <ConnectButton />
           </div>
         )}
       </div>

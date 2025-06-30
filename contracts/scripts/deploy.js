@@ -1,12 +1,14 @@
 /* eslint-env node */
-
-import fs from "fs";
-import path from "path";
-import { ethers } from "hardhat"; // ✅ Correct import
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const fs = require("fs");
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const path = require("path");
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const hre = require("hardhat");
 
 async function main() {
-//   const [deployer] = await ethers.getSigners();
-  const StockNFT = await ethers.getContractFactory("StockNFT");
+  // const [deployer] = await hre.ethers.getSigners();
+  const StockNFT = await hre.ethers.getContractFactory("StockNFT");
   const stockNFT = await StockNFT.deploy();
 
   await stockNFT.waitForDeployment();
