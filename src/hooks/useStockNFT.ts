@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { BrowserProvider, Contract, Signer } from "ethers";
-import { stockNFT } from "@/lib/contract/stockNFT";
+import abi from "@/lib/contract/abi.json";
+import { StockNFT } from "@/lib/contract/address.json";
 
 export function useStockNFT() {
   const [provider, setProvider] = useState<BrowserProvider | null>(null);
@@ -24,7 +25,7 @@ export function useStockNFT() {
         const signer = await browserProvider.getSigner();
         setSigner(signer);
 
-        const contract = new Contract(stockNFT.address, stockNFT.abi, signer);
+        const contract = new Contract(StockNFT, abi, signer);
         setContract(contract);
       } catch {
         setError("Failed to connect to wallet");
