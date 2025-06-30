@@ -56,7 +56,7 @@ A modern stock tracking dashboard built with **Next.js**, **Prisma**, and **Rech
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/paramarcosel/nextauth.git
 cd your-repo
 ```
 ### 2. Install Dependencies
