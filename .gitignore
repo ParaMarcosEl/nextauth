@@ -1,51 +1,51 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+/next-auth-app/node_modules
+/next-auth-app/.pnp
+/next-auth-app/.pnp.*
+/next-auth-app/.yarn/*
+/next-auth-app/!.yarn/patches
+/next-auth-app/!.yarn/plugins
+/next-auth-app/!.yarn/releases
+/next-auth-app/!.yarn/versions
 
 # testing
-/coverage
+/next-auth-app//coverage
 
 # next.js
-/.next/
-/out/
+/next-auth-app/.next/
+/next-auth-app/out/
 
 # production
-/build
+/next-auth-app/build
 
 # misc
-.DS_Store
-*.pem
+/next-auth-app/.DS_Store
+/next-auth-app/*.pem
 
 # debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+/next-auth-app/npm-debug.log*
+/next-auth-app/yarn-debug.log*
+/next-auth-app/yarn-error.log*
+/next-auth-app/.pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+/next-auth-app/.env*
 
 # vercel
-.vercel
+/next-auth-app/.vercel
 
 # typescript
-*.tsbuildinfo
-next-env.d.ts
+/next-auth-app/*.tsbuildinfo
+/next-auth-app/next-env.d.ts
 
-/src/generated/prisma
-*.log
-prisma/dev.db
-prisma/dev.db-journal
+/next-auth-app/src/generated/prisma
+/next-auth-app/*.log
+/next-auth-app/prisma/dev.db
+/next-auth-app/prisma/dev.db-journal
 
-.vercel
+/next-auth-app/.vercel
 
 # Hardhat build artifacts
 /contracts/artifacts/
