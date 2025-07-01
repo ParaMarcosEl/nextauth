@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import React, { Suspense } from "react";
 import SignInForm from "./signinForm";
 
 export default function SignInPage() {
