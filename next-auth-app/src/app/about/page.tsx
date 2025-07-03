@@ -23,6 +23,11 @@ export default function AboutPage() {
             />
           </div>
         </div>
+        
+          
+        <h2 className="text-2xl font-bold text-center text-indigo-700">
+          parael82@gmail.com | 347-927-2728
+        </h2>
         <section className="text-lg leading-relaxed">
           <p>
             I&apos;m a seasoned full-stack engineer who thrives on solving complex problems with clean, modern code. I enjoy planning to the end, staying organized, and managing technical risk. I&apos;m passionate about building polished, scalable web applications and taking ideas from concept to production.

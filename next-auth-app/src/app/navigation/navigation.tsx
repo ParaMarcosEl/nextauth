@@ -65,9 +65,9 @@ function NavLinks({ mobile = false }: { mobile?: boolean }) {
   return (
     <>
       <Link href="/" className={linkClass}>Home</Link>
+      <Link href="/about" className={linkClass}>About</Link>
       <Link href="/signin" className={linkClass}>Sign In</Link>
       <Link href="/dashboard" className={linkClass}>Dashboard</Link>
-      <Link href="/about" className={linkClass}>About</Link>
       <Link target="_blank" href="http://github.com/paramarcosel/nextauth" className={linkClass}>Github</Link>
     </>
   );
